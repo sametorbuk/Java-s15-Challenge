@@ -1,5 +1,7 @@
 package com.workintech.bookCollection;
 
+import com.workintech.libraryManagement.Library;
+
 import java.util.Objects;
 
 public abstract class Book {
@@ -14,12 +16,20 @@ public abstract class Book {
 
 
     public Book(int id, String author, String title, double price, String edition) {
+
+        if (Library.getBooks().containsKey(id)) {
+            throw new IllegalArgumentException("A book with ID " + id +
+                    " already exists in the system. Please enter another ID.");
+        }
+
         this.id = id;
         this.author = author;
         this.title = title;
         this.price = price;
         this.edition = edition;
         this.available = true;
+
+
     }
 
     public int getId() {

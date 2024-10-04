@@ -34,6 +34,10 @@ public class Librarian extends Person {
         }
     }
 
+    public void newBook(Book book){
+        Library.newBook(book);
+    }
+
 
     public void searchBook(String bookTitle){
         boolean bookFound = false;
@@ -70,6 +74,8 @@ public class Librarian extends Person {
         }
 
     }
+
+
 
 
 

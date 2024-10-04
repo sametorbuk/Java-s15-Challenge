@@ -28,6 +28,10 @@ public class Reader extends Person {
 
     }
 
+    public Member_Record getRecord() {
+        return record;
+    }
+
     public void borrow_book(Book book) {
         books.add(book);
     }
@@ -46,5 +50,14 @@ public class Reader extends Person {
     @Override
     public String whoYouAre() {
         return   super.whoYouAre() + ">>>> Title >>>> Reader";
+    }
+
+
+    @Override
+    public String toString() {
+        return "Reader{" +
+                "books=" + books +
+                ", record=" + record +
+                '}';
     }
 }

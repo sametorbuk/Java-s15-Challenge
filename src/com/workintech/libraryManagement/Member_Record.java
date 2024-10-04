@@ -28,6 +28,9 @@ public class Member_Record {
         return type;
     }
 
+
+
+
     public String getDate_of_membership() {
         return date_of_membership;
     }
@@ -90,5 +93,17 @@ public class Member_Record {
     }
 
 
+    @Override
+    public String toString() {
+        return "Member_Record{" +
+                "address='" + address + '\'' +
+                ", member_id=" + member_id +
+                ", type='" + type + '\'' +
+                ", date_of_membership='" + date_of_membership + '\'' +
+                ", max_book_limit=" + max_book_limit +
+                ", name='" + name + '\'' +
+                ", phone_no='" + phone_no + '\'' +
+                '}';
     }
+}
 

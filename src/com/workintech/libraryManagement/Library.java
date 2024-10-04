@@ -3,12 +3,20 @@ package com.workintech.libraryManagement;
 import com.workintech.bookCollection.Book;
 import com.workintech.persons.Reader;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Library {
     private static Map<Integer , Object> books;
     private static Map<Integer , Object> readers;
     private  static Map<Integer , Object> authors;
+
+
+
+    public Library() {
+        this.books = new HashMap<>();
+        this.readers = new HashMap<>();
+    }
 
     public Library(Map<Integer, Object> books, Map<Integer, Object> authors) {
         this.books = books;
@@ -24,28 +32,40 @@ public class Library {
         return readers;
     }
 
-    public static Map<Integer, Object> getAuthors() {
+    public  static Map<Integer, Object> getAuthors() {
         return authors;
     }
 
-    public void setBooks(Map<Integer, Object> books) {
-        this.books = books;
+    public static void setBooks(Map<Integer, Object> books) {
+        Library.books = books;
     }
 
-    public void setAuthors(Map<Integer, Object> authors) {
-        this.authors = authors;
+    public static void setAuthors(Map<Integer, Object> authors) {
+        Library.authors = authors;
     }
 
-    public void setReaders(Map<Integer, Object> readers) {
-        this.readers = readers;
+    public static void setReaders(Map<Integer, Object> readers) {
+        Library.readers = readers;
     }
 
-    public void newBook(Book book){
+    public static void newBook(Book book){
+        if(books == null){
+            Library.books = new HashMap<>();
+        }
         books.put(book.getId(), book);
 
     }
 
-    public void lendBook(Book book , Reader reader){
+    public static void addReader(Reader reader){
+
+        if (readers == null) {
+            readers = new HashMap<>();
+        }
+
+        Library.readers.put(reader.getRecord().getMember_id() , reader);
+    }
+
+    public static void lendBook(Book book , Reader reader){
 
         if(book.isAvailable() &&  !(reader.getBooks().contains(book)) ){
             book.setOwner(reader.getName());
@@ -60,7 +80,7 @@ public class Library {
     }
 
 
-    public void takeBackBook(Book book , Reader reader){
+    public static void takeBackBook(Book book , Reader reader){
 
         if(reader.getBooks().contains(book)){
             reader.return_book(book);
