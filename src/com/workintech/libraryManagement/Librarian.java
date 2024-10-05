@@ -38,6 +38,10 @@ public class Librarian extends Person {
         Library.newBook(book);
     }
 
+    public void deleteBook(int id){
+        Library.deleteBook(id);
+    }
+
 
     public void searchBook(String bookTitle){
         boolean bookFound = false;
@@ -63,14 +67,14 @@ public class Librarian extends Person {
         for(Object obj : Library.getBooks().values()){
             Book book = (Book) obj;
             if(book.getId() == book_id){
-                System.out.println(book);
+                System.out.println(book.toString());
                 bookFound=true;
                 break;
             }
         }
 
         if(!bookFound){
-            System.out.println("There is no such book");
+            System.out.println("There is no book with this id");
         }
 
     }

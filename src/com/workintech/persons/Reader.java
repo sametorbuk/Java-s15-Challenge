@@ -33,11 +33,30 @@ public class Reader extends Person {
     }
 
     public void borrow_book(Book book) {
-        books.add(book);
+
+       if(book.isAvailable() && books.size() < 5){
+           books.add(book);
+           book.setAvailable(false);
+           book.setOwner(record.getName());
+       } else if(!book.isAvailable()) {
+           System.out.println("Bu kitap şuan " + book.getOwner() + " adlı üyede olduğu için ödünç alamazsınız");
+       } else if(book.isAvailable() && books.size() == 5){
+           System.out.println("Kullanıcı alabileceği kitap  limitine zaten ulaşmıştır");
+       }
     }
 
     public void return_book(Book book){
         books.remove(book);
+    }
+
+    public void return_book(int id){
+        for(Book book : books){
+            if(book.getId() == id){
+                books.remove(book);
+            } else {
+                System.out.println("Bu kullanıcıda böyle bir kitap mevcut değil");
+            }
+        }
     }
 
     public void show_book(){
@@ -60,4 +79,10 @@ public class Reader extends Person {
                 ", record=" + record +
                 '}';
     }
+
+
+
+
+
+
 }

@@ -5,6 +5,7 @@ import com.workintech.persons.Reader;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Library {
     private static Map<Integer , Object> books;
@@ -94,12 +95,55 @@ public class Library {
     }
 
 
-    public void showBook(){
+    public static void showBook(){
 
         books.forEach((key , value) -> {
             System.out.println(value.toString());
         });
     }
+
+
+    public static void deleteBook(int id){
+        if(books.containsKey(id)){
+            books.remove(id);
+            System.out.println("Book with " + id  + " id deleted successfully");
+        } else {
+            System.out.println("There is no book with this id");
+        }
+    }
+
+
+    public static
+    void deleteBook(String title){
+        String cleanedInputTitle = title.replaceAll("[\\s+\\.\\,\\!\\?\\;\\:\\-]", "").toLowerCase();
+
+        Set<Integer> keys = books.keySet();
+
+        for(Integer key : keys){
+           Book book =(Book) books.get(key);
+           String cleanedTitle = book.getTitle().replaceAll("[\\s+\\.\\,\\!\\?\\;\\:\\-]", "").toLowerCase();
+            boolean bookFound = false;
+
+
+           if(cleanedTitle.contains(cleanedInputTitle)){
+               books.remove(book.getId());
+               System.out.println("Book successfully deleted");
+               bookFound=true;
+               break;
+           }
+
+
+           if(!bookFound){
+               System.out.println("There is no book with this title");
+           }
+
+
+        }
+    }
+
+
+
+
 
 
 
