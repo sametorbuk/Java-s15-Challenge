@@ -10,16 +10,26 @@ import java.util.Set;
 public class Library {
     private static Map<Integer , Object> books;
     private static Map<Integer , Object> readers;
-    private  static Map<Integer , Object> authors;
+    private  static Map<String , Map<Integer , Object>> authors;
+    private static Map<String , Map<Integer , Object>> categories;
 
 
-
-    public Library() {
-        this.books = new HashMap<>();
-        this.readers = new HashMap<>();
+    public static void setCategories(Map<String, Map<Integer , Object>> categories) {
+        Library.categories = categories;
     }
 
-    public Library(Map<Integer, Object> books, Map<Integer, Object> authors) {
+    public static Map<String, Map<Integer, Object>> getCategories() {
+        return categories;
+    }
+
+    public Library() {
+        Library.books = new HashMap<>();
+        Library.readers = new HashMap<>();
+        Library.categories=new HashMap<>();
+        Library.authors= new HashMap<>();
+    }
+
+    public Library(Map<Integer, Object> books,Map<String , Map<Integer , Object>> authors) {
         this.books = books;
         this.authors = authors;
     }
@@ -33,7 +43,7 @@ public class Library {
         return readers;
     }
 
-    public  static Map<Integer, Object> getAuthors() {
+    public  static Map<String , Map<Integer , Object>> getAuthors() {
         return authors;
     }
 
@@ -41,7 +51,7 @@ public class Library {
         Library.books = books;
     }
 
-    public static void setAuthors(Map<Integer, Object> authors) {
+    public static void setAuthors(Map<String , Map<Integer , Object>> authors) {
         Library.authors = authors;
     }
 
@@ -78,6 +88,16 @@ public class Library {
             System.out.println("The book is not available");
         }
 
+    }
+
+
+
+    public static void updateBook(int id , Book book){
+        if(books.get(id) != null){
+            books.put(id , book);
+        } else {
+            System.out.println("There is no book with this id");
+        }
     }
 
 
@@ -143,7 +163,28 @@ public class Library {
 
 
 
+      public void listBooksByCategory(String category){
+        String cleanedInput = category.replaceAll("[\\s+.,!?:;\"'()\\[\\]{}]", "").toLowerCase();
+        Set<String> keys = categories.keySet();
 
+        for(String key : keys){
+
+            if(key.contains(cleanedInput)){
+
+                Set<Integer> bookKeys=categories.get(key).keySet();
+
+                for(Integer bookKey : bookKeys){
+
+                    System.out.println(categories.get(key).get(bookKey).toString());
+                }
+            } else{
+                System.out.println("There is no category with this input")
+
+
+                ;
+            }
+        }
+      }
 
 
 

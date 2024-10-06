@@ -13,9 +13,10 @@ public abstract class Book {
     private boolean available;
     private String edition;
     private String owner;
+    private String category;
 
 
-    public Book(int id, String author, String title, double price, String edition) {
+    public Book(int id, String author, String title, double price, String edition , String category) {
 
         if (Library.getBooks().containsKey(id)) {
             throw new IllegalArgumentException("A book with ID " + id +
@@ -28,8 +29,13 @@ public abstract class Book {
         this.price = price;
         this.edition = edition;
         this.available = true;
+        this.category=category;
 
 
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public int getId() {

@@ -80,6 +80,27 @@ public class Librarian extends Person {
     }
 
 
+    public void updateBook(int book_id , Book uptadeInfo){
+        boolean bookFound = false;
+
+        for(Object obj : Library.getBooks().values()){
+            Book book = (Book) obj;
+            if(book.getId() == book_id){
+                System.out.println(book.toString());
+                Library.updateBook(book_id , uptadeInfo);
+                bookFound=true;
+                break;
+            }
+        }
+
+        if(!bookFound){
+            System.out.println("There is no book with this id");
+        }
+
+    }
+
+
+
 
 
 
