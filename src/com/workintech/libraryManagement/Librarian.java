@@ -61,6 +61,28 @@ public class Librarian extends Person {
 
     }
 
+
+    public boolean isThereAbook(String bookTitle){
+
+        for(Object obj : Library.getBooks().values()){
+            Book book = (Book) obj;
+            if(book.getTitle().contains(bookTitle.toLowerCase())){
+
+              return true;
+            }
+        }
+
+
+        return false;
+    }
+
+
+
+
+
+
+
+
     public void searchBook(int book_id){
         boolean bookFound = false;
 

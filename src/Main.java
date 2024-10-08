@@ -2,22 +2,21 @@ import com.workintech.bookCollection.Book;
 import com.workintech.bookCollection.Magazines;
 import com.workintech.bookCollection.Novel;
 import com.workintech.bookCollection.StudyBooks;
+import com.workintech.libraryManagement.Librarian;
 import com.workintech.libraryManagement.Library;
 import com.workintech.libraryManagement.Member_Record;
 import com.workintech.persons.Person;
 import com.workintech.persons.Reader;
 import jdk.jfr.Category;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-
         Library library = new Library();
+        Librarian librarian = new Librarian("samet" );
+
 
         Object[][] novelsData = {
                 {1, "Victor Hugo", "Sefiller", 14.43, "2023-10-01", "Novel"},
@@ -308,7 +307,133 @@ public class Main {
         System.out.println("********************************************************");
 
 
+        Scanner scanner = new Scanner(System.in);
 
+        int choice = 0;
+
+
+        while (choice != 7) {
+            System.out.println("Kütüphane Sistemi");
+            System.out.println("1. Kitap Ekle");
+            System.out.println("2. Kitapları Göster");
+            System.out.println("3. Kitap Güncelle");
+            System.out.println("4. Kitap Sil");
+            System.out.println("5. Kitap Ödünç Al");
+            System.out.println("6. Kitap Geri İade Et");
+            System.out.println("7. Çıkış");
+            System.out.print("Seçiminizi yapın: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+
+            switch (choice){
+                case 1:
+                    System.out.println("Kitabın ismini girin:");
+                    String title = scanner.nextLine();
+                    System.out.println("Yazarın adını girin:");
+                    String author = scanner.nextLine();
+                    System.out.println("Kitap id si girin:");
+
+
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    while(Library.getBooks().containsKey(id)){
+                        System.out.println("Sistemde zaten bu id ye sahip bir kitap var başka bir id giriniz");
+                        id=scanner.nextInt();
+                        scanner.nextLine();
+                    }
+
+                   double price = 0.0;
+
+                    while(true){
+                        System.out.println("Kitabın ücretini girin:");
+                        try{
+
+                            price = scanner.nextDouble();
+                            if(price <= 0){
+                                System.out.println("Lütfen pozitif bir değer girin");
+                            }else{
+                                break;
+                            }
+
+                        }catch (InputMismatchException e){
+                            System.out.println("Lütfen geçerli bir sayı girin");
+                            scanner.next();
+                        }
+                    }
+                    scanner.nextLine();
+
+                    System.out.println("Lütfen baskı tarihini girin:");
+                    String edition = scanner.nextLine();
+
+                    System.out.println("Lütfen kategori girin:");
+                    String category = scanner.nextLine();
+
+                    Library.newBook(new Book(id , author , title , price , edition , category));
+                    System.out.println("Kitap başarıyla sisteme eklendi.");
+                     break;
+
+
+
+
+                case 4:
+
+                    System.out.println("Kitabı hangi verisine göre silmek istersiniz?");
+                    System.out.println("1. ID ile sil");
+                    System.out.println("2. Başlık ile sil");
+
+                    while(true){
+                        try{
+                            choice=scanner.nextInt();
+                            if(choice == 1 || choice == 2){
+                                break;
+                            }else{
+                                System.out.println("Lütfen geçerli bir seçim yapınız ");
+                            }
+                        }catch (InputMismatchException e){
+                            System.out.println("Lütfen geçerli bir değer giriniz");
+                            scanner.next();
+                        }
+                    }
+                    scanner.nextLine();
+                    if(choice == 1){
+                        System.out.println("Lütfen silmek istediğiniz kitabın id sini girin:");
+                        int bookId = scanner.nextInt();
+
+                        if(Library.getBooks().containsKey(bookId)){
+                            Library.deleteBook(bookId);
+
+                        } else{
+                            System.out.println("Sistemde böyle bir kitap bulunmuyor id yi doğru girin.");
+                        }
+
+                    } else if(choice == 2){
+                        System.out.println("Silmek istediğiniz kitabın başlığını girin");
+                        String titleInput = scanner.nextLine();
+                        String cleanedInput = titleInput.replaceAll("[\\s+,.!?:;]", "");
+
+                        boolean bookFound = false;
+                        for (Book book : new HashSet<>(Library.getBooks().values())) {
+                            String cleanedTitle = book.getTitle().replaceAll("[\\s+,.!?:;]", "").toLowerCase();
+                            if (cleanedTitle.contains(cleanedInput)) {
+                                Library.getBooks().remove(book.getId());
+                                System.out.println("Kitap sistemden başarıyla silindi: " + book.getTitle().toUpperCase());
+                                bookFound = true;
+                            }
+                        }
+
+                        if (!bookFound) {
+                            System.out.println("Sistemde böyle bir kitap yok, lütfen tekrar deneyin.");
+                        }
+
+                    }
+
+                default:
+                    System.out.println("Lütfen seçimizi düzgün yapın.");
+            }
+
+        }
 
 
 

@@ -4,7 +4,7 @@ import com.workintech.libraryManagement.Library;
 
 import java.util.Objects;
 
-public abstract class Book {
+public class Book {
 
     private int id;
     private String author;

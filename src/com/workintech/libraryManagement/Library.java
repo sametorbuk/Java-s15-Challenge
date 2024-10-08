@@ -25,8 +25,8 @@ public class Library {
     public Library() {
         Library.books = new HashMap<>();
         Library.readers = new HashMap<>();
-        Library.categories=new HashMap<>();
-        Library.authors= new HashMap<>();
+        Library.categories = new HashMap<>();
+        Library.authors = new HashMap<>();
     }
 
     public Library(Map<Integer, Book> books,Map<String , Map<Integer , Object>> authors) {
@@ -195,10 +195,10 @@ public class Library {
                     System.out.println(categories.get(key).get(bookKey).toString());
                 }
             } else{
-                System.out.println("There is no category with this input")
+                System.out.println("There is no category with this input");
 
 
-                ;
+
             }
         }
       }
