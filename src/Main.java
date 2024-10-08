@@ -278,6 +278,38 @@ public class Main {
         }
 
 
+          Reader reader = new Reader("Samet", new Member_Record(23,
+                  "0505780213", "Akbelen mahallesi 84090." +
+                  " sokak", "Samet", 5, "04.10.24", "Reader") , new ArrayList<>());
+
+             reader.borrow_book(25);
+        reader.borrow_book(35);
+        reader.borrow_book(21);
+        reader.borrow_book(21);
+        reader.borrow_book(23);
+        reader.borrow_book(26);
+        reader.borrow_book(27);
+
+
+       Set<Integer> readerKeys = Library.getReaders().keySet();
+
+       for(Integer key : readerKeys){
+           System.out.println(  Library.getReaders().get(key).getRecord().toString());
+       }
+
+        System.out.println(readerKeys.size());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }

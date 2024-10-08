@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class Library {
-    private static Map<Integer , Object> books;
-    private static Map<Integer , Object> readers;
+    private static Map<Integer , Book> books;
+    private static Map<Integer , Reader> readers;
     private  static Map<String , Map<Integer , Object>> authors;
     private static Map<String , Map<Integer , Object>> categories;
 
@@ -29,17 +29,16 @@ public class Library {
         Library.authors= new HashMap<>();
     }
 
-    public Library(Map<Integer, Object> books,Map<String , Map<Integer , Object>> authors) {
+    public Library(Map<Integer, Book> books,Map<String , Map<Integer , Object>> authors) {
         this.books = books;
         this.authors = authors;
     }
 
-
-    public static Map<Integer, Object> getBooks() {
+    public static Map<Integer, Book> getBooks() {
         return books;
     }
 
-    public static Map<Integer, Object> getReaders() {
+    public static Map<Integer, Reader> getReaders() {
         return readers;
     }
 
@@ -47,7 +46,7 @@ public class Library {
         return authors;
     }
 
-    public static void setBooks(Map<Integer, Object> books) {
+    public static void setBooks(Map<Integer, Book> books) {
         Library.books = books;
     }
 
@@ -55,7 +54,7 @@ public class Library {
         Library.authors = authors;
     }
 
-    public static void setReaders(Map<Integer, Object> readers) {
+    public static void setReaders(Map<Integer, Reader> readers) {
         Library.readers = readers;
     }
 
@@ -102,7 +101,6 @@ public class Library {
 
 
     public static void takeBackBook(Book book , Reader reader){
-
         if(reader.getBooks().contains(book)){
             reader.return_book(book);
             book.setAvailable(true);
@@ -111,8 +109,27 @@ public class Library {
             System.out.println("This person doesn't have this book");
         }
 
+    }
+
+
+    public static void takeBackBook(int bookId , Reader reader){
+        for(Book book : reader.getBooks()){
+            if (book.getId() == bookId){
+                reader.getBooks().remove(book);
+                System.out.println("Kitap başarıyla iade edildi");
+                System.out.println("Ücret iadeniz" + " " + book.getPrice() + "TL dir");
+            } else {
+                System.out.println("Kullanıcıda böyle bir kitap bulunmuyor");
+            }
+        }
 
     }
+
+
+
+
+
+
 
 
     public static void showBook(){
