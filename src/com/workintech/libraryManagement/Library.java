@@ -11,14 +11,14 @@ public class Library {
     private static Map<Integer , Book> books;
     private static Map<Integer , Reader> readers;
     private  static Map<String , Map<Integer , Object>> authors;
-    private static Map<String , Map<Integer , Object>> categories;
+    private static Map<String , Map<Integer , Book>> categories;
 
 
-    public static void setCategories(Map<String, Map<Integer , Object>> categories) {
+    public static void setCategories(Map<String, Map<Integer , Book>> categories) {
         Library.categories = categories;
     }
 
-    public static Map<String, Map<Integer, Object>> getCategories() {
+    public static Map<String, Map<Integer, Book>> getCategories() {
         return categories;
     }
 

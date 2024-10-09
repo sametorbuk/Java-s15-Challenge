@@ -9,6 +9,7 @@ import com.workintech.persons.Person;
 import com.workintech.persons.Reader;
 import jdk.jfr.Category;
 
+import javax.sound.midi.Soundbank;
 import java.util.*;
 
 public class Main {
@@ -63,11 +64,11 @@ public class Main {
            Library.newBook(novel);
 
             if(Library.getCategories().containsKey(novel.getCategory())){
-                Map<Integer, Object> categoryBooks = Library.getCategories().get(category);
+                Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, novel);
             } else {
 
-                Map<Integer, Object> categoryBooks = new HashMap<>();
+                Map<Integer, Book> categoryBooks = new HashMap<>();
                 categoryBooks.put(id, novel);
                 Library.getCategories().put(category, categoryBooks);
                 
@@ -125,11 +126,11 @@ public class Main {
             Library.newBook(studyBook);
 
             if(Library.getCategories().containsKey(studyBook.getCategory())){
-                Map<Integer, Object> categoryBooks = Library.getCategories().get(category);
+                Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, studyBook);
             } else {
 
-                Map<Integer, Object> categoryBooks = new HashMap<>();
+                Map<Integer, Book> categoryBooks = new HashMap<>();
                 categoryBooks.put(id, studyBook);
                 Library.getCategories().put(category, categoryBooks);
 
@@ -190,11 +191,11 @@ public class Main {
 
 
             if(Library.getCategories().containsKey(magazine.getCategory())){
-                Map<Integer, Object> categoryBooks = Library.getCategories().get(category);
+                Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, magazine);
             } else {
 
-                Map<Integer, Object> categoryBooks = new HashMap<>();
+                Map<Integer, Book> categoryBooks = new HashMap<>();
                 categoryBooks.put(id, magazine);
                 Library.getCategories().put(category, categoryBooks);
             }
@@ -243,7 +244,7 @@ public class Main {
         for (String key : categoriesKeys) {
             System.out.println("*****************" + key.toUpperCase() + "*****************");
 
-            Map<Integer, Object> categoryMap = Library.getCategories().get(key);
+            Map<Integer, Book> categoryMap = Library.getCategories().get(key);
             if (categoryMap != null) {
                 Set<Integer> bookKeys = categoryMap.keySet();
 
@@ -327,6 +328,8 @@ public class Main {
 
 
             switch (choice){
+
+//MAİN CASE KİTAP EKLE
                 case 1:
                     System.out.println("Kitabın ismini girin:");
                     String title = scanner.nextLine();
@@ -375,8 +378,211 @@ public class Main {
                      break;
 
 
+//MAİN CASE KİTAPLARI GÖSTER
+                     case 2:
+                    System.out.println("Lütfen kategori seçiniz:");
+                    System.out.println("1. Magazine");
+                    System.out.println("2. Study Books");
+                    System.out.println("3. Novels");
+
+                    while(true){
+                        try{
+                            choice = scanner.nextInt();
+                            if(choice == 1 || choice == 2 || choice == 3){
+                                break;
+                            } else{
+                                System.out.println("Lütfen geçerli bir seçim yapınız");
+                            }
+                        }catch (InputMismatchException e){
+                            System.out.println("Lütfen geçerli bir değer giriniz");
+                            scanner.next();
+                        }
+                    }
+                    scanner.nextLine();
+
+                   switch (choice){
+                       case 1:
+                           System.out.println("***********************************");
+                           System.out.println("************MAGAZINES**************");
+                           System.out.println("***********************************");
+
+                           HashMap<Integer, Book> magazineBooks = new HashMap<>(Library.getCategories().get("Magazine"));
+
+                           Set<Integer> magazineBookKeys= magazineBooks.keySet();
+
+                           for(Integer key : magazineBookKeys){
+                               System.out.println(magazineBooks.get(key).toString());
+                           }
+
+                       case 2:
+                           System.out.println("***********************************");
+                           System.out.println("************STUDY BOOKS**************");
+                           System.out.println("***********************************");
+
+                           HashMap<Integer, Book> studyBooks = new HashMap<>(Library.getCategories().get("StudyBook"));
+
+                           Set<Integer> studyBooksKeys= studyBooks.keySet();
+
+                           for(Integer key : studyBooksKeys){
+                               System.out.println(studyBooks.get(key).toString());
+                           }
 
 
+                       case 3:
+
+                           System.out.println("***********************************");
+                           System.out.println("************NOVELS**************");
+                           System.out.println("***********************************");
+
+                           HashMap<Integer, Book> novels = new HashMap<>(Library.getCategories().get("Novel"));
+
+                           Set<Integer> novelsKeys= novels.keySet();
+
+                           for(Integer key : novelsKeys){
+                               System.out.println(novels.get(key).toString());
+                           }
+
+                   }
+
+
+
+
+//MAİN CASE KİTAP GÜNCELLE
+                case 3:
+
+                    System.out.println("Güncelleyeceğiniz kitabı hangi verisi ile seçmek istersiniz:");
+
+                    System.out.println("1. ID ye göre seç");
+                    System.out.println("2. Başlığa göre seç");
+
+                    while(true){
+                        try{
+                            choice=scanner.nextInt();
+                            if(choice == 1 || choice == 2){
+                                break;
+                            }else{
+                                System.out.println("Lütfen geçerli bir seçim yapınız ");
+                            }
+                        }catch (InputMismatchException e){
+                            System.out.println("Lütfen geçerli bir değer giriniz");
+                            scanner.next();
+                        }
+                    }
+                    scanner.nextLine();
+                    if(choice == 1){
+                        System.out.println("Lütfen güncellemek istediğiniz kitabın id sini girin:");
+
+                        int bookId = scanner.nextInt();
+
+                        while(Library.getBooks().containsKey(bookId)){
+                            System.out.println("Sistemde zaten bu id ye sahip bir kitap var başka bir id giriniz");
+                            bookId=scanner.nextInt();
+                            scanner.nextLine();
+                        }
+
+                        if(Library.getBooks().containsKey(bookId)){
+
+
+                            System.out.println("Kitabın ismini girin:");
+                            String newTitle = scanner.nextLine();
+                            System.out.println("Yazarın adını girin:");
+                            String newAuthor = scanner.nextLine();
+
+                            double priceOfBook = 0.0;
+
+                            while(true){
+                                System.out.println("Kitabın ücretini girin:");
+                                try{
+
+                                    priceOfBook = scanner.nextDouble();
+                                    if(priceOfBook <= 0){
+                                        System.out.println("Lütfen pozitif bir değer girin");
+                                    }else{
+                                        break;
+                                    }
+
+                                }catch (InputMismatchException e){
+                                    System.out.println("Lütfen geçerli bir sayı girin");
+                                    scanner.next();
+                                }
+                            }
+                            scanner.nextLine();
+
+                            System.out.println("Lütfen baskı tarihini girin:");
+                            String newEdition = scanner.nextLine();
+
+                            System.out.println("Lütfen kategori girin:");
+                            String newCategory = scanner.nextLine();
+
+
+                            Library.getBooks().put(bookId , new Book(bookId , newAuthor , newTitle , priceOfBook , newEdition , newCategory));
+                            System.out.println( bookId + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
+
+                        } else{
+                            System.out.println("Sistemde böyle bir kitap bulunmuyor id yi doğru girin.");
+                        }
+
+                    } else if(choice == 2){
+                        System.out.println("Güncellemek  istediğiniz kitabın başlığını girin");
+                        String titleInput = scanner.nextLine();
+                        String cleanedInput = titleInput.replaceAll("[\\s+,.!?:;]", "");
+
+                        boolean bookFound = false;
+                        for (Book book : new HashSet<>(Library.getBooks().values())) {
+                            String cleanedTitle = book.getTitle().replaceAll("[\\s+,.!?:;]", "").toLowerCase();
+                            if (cleanedTitle.contains(cleanedInput)) {
+
+                                System.out.println("Kitabın yeni ismini girin:");
+                                String newTitle = scanner.nextLine();
+                                System.out.println("Yazarın yeni adını girin:");
+                                String newAuthor = scanner.nextLine();
+
+                                double priceOfBook = 0.0;
+
+                                while(true){
+                                    System.out.println("Kitabın yeni ücretini girin:");
+                                    try{
+
+                                        priceOfBook = scanner.nextDouble();
+                                        if(priceOfBook <= 0){
+                                            System.out.println("Lütfen pozitif bir değer girin");
+                                        }else{
+                                            break;
+                                        }
+
+                                    }catch (InputMismatchException e){
+                                        System.out.println("Lütfen geçerli bir sayı girin");
+                                        scanner.next();
+                                    }
+                                }
+                                scanner.nextLine();
+
+                                System.out.println("Lütfen yeni baskı tarihini girin:");
+                                String newEdition = scanner.nextLine();
+
+                                System.out.println("Lütfen yeni kategori girin:");
+                                String newCategory = scanner.nextLine();
+
+
+                                Library.updateBook(book.getId(), new Book(book.getId(), newAuthor , newTitle , priceOfBook , newEdition , newCategory));
+
+                                System.out.println( book.getId() + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
+
+                                bookFound = true;
+                            }
+                        }
+
+                        if (!bookFound) {
+                            System.out.println("Sistemde böyle bir kitap yok, lütfen tekrar deneyin.");
+                        }
+
+                    }
+
+
+
+
+
+//MAİN CASE KİTAP SİL
                 case 4:
 
                     System.out.println("Kitabı hangi verisine göre silmek istersiniz?");
@@ -428,6 +634,18 @@ public class Main {
                         }
 
                     }
+
+ // MAIN CASE KİTAP ÖDÜNÇ AL
+
+                case 5:
+
+
+
+
+
+
+
+
 
                 default:
                     System.out.println("Lütfen seçimizi düzgün yapın.");
