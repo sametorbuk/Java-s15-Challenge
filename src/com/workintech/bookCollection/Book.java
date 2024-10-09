@@ -16,6 +16,10 @@ public class Book {
     private String category;
 
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Book(int id, String author, String title, double price, String edition , String category) {
 
         if (Library.getBooks().containsKey(id)) {

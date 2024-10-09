@@ -324,6 +324,7 @@ public class Main {
             System.out.println("7. Çıkış");
             System.out.print("Seçiminizi yapın: ");
             choice = scanner.nextInt();
+
             scanner.nextLine();
 
 
@@ -413,6 +414,7 @@ public class Main {
                            for(Integer key : magazineBookKeys){
                                System.out.println(magazineBooks.get(key).toString());
                            }
+                           break;
 
                        case 2:
                            System.out.println("***********************************");
@@ -426,6 +428,7 @@ public class Main {
                            for(Integer key : studyBooksKeys){
                                System.out.println(studyBooks.get(key).toString());
                            }
+                           break;
 
 
                        case 3:
@@ -441,9 +444,10 @@ public class Main {
                            for(Integer key : novelsKeys){
                                System.out.println(novels.get(key).toString());
                            }
+                           break;
 
                    }
-
+                    break;
 
 
 
@@ -474,24 +478,26 @@ public class Main {
 
                         int bookId = scanner.nextInt();
 
-                        while(Library.getBooks().containsKey(bookId)){
-                            System.out.println("Sistemde zaten bu id ye sahip bir kitap var başka bir id giriniz");
+                        while(!Library.getBooks().containsKey(bookId)){
+                            System.out.println("Sistemde  bu id ye sahip bir kitap yok id nin doğru olduğundan emin misiniz ?");
                             bookId=scanner.nextInt();
                             scanner.nextLine();
                         }
 
                         if(Library.getBooks().containsKey(bookId)){
+                              scanner.nextLine();
 
-
-                            System.out.println("Kitabın ismini girin:");
+                            System.out.println("Kitabın yeni ismini girin:");
                             String newTitle = scanner.nextLine();
-                            System.out.println("Yazarın adını girin:");
+
+
+                            System.out.println("Yazarın yeni adını girin:");
                             String newAuthor = scanner.nextLine();
 
                             double priceOfBook = 0.0;
 
                             while(true){
-                                System.out.println("Kitabın ücretini girin:");
+                                System.out.println("Kitabın yeni ücretini girin:");
                                 try{
 
                                     priceOfBook = scanner.nextDouble();
@@ -508,14 +514,20 @@ public class Main {
                             }
                             scanner.nextLine();
 
-                            System.out.println("Lütfen baskı tarihini girin:");
+                            System.out.println("Lütfen yeni baskı tarihini girin:");
                             String newEdition = scanner.nextLine();
 
-                            System.out.println("Lütfen kategori girin:");
+                            System.out.println("Lütfen yeni kategori girin:");
                             String newCategory = scanner.nextLine();
 
+                            Book book = Library.getBooks().get(bookId);
 
-                            Library.getBooks().put(bookId , new Book(bookId , newAuthor , newTitle , priceOfBook , newEdition , newCategory));
+                            book.setTitle(newTitle);
+                            book.setAuthor(newAuthor);
+                            book.setPrice(priceOfBook);
+                            book.setEdition(newEdition);
+                            book.setCategory(newCategory);
+
                             System.out.println( bookId + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
 
                         } else{
@@ -564,7 +576,11 @@ public class Main {
                                 String newCategory = scanner.nextLine();
 
 
-                                Library.updateBook(book.getId(), new Book(book.getId(), newAuthor , newTitle , priceOfBook , newEdition , newCategory));
+                                book.setTitle(newTitle);
+                                book.setAuthor(newAuthor);
+                                book.setPrice(priceOfBook);
+                                book.setEdition(newEdition);
+                                book.setCategory(newCategory);
 
                                 System.out.println( book.getId() + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
 
@@ -577,8 +593,7 @@ public class Main {
                         }
 
                     }
-
-
+                    break;
 
 
 
@@ -635,9 +650,14 @@ public class Main {
 
                     }
 
+                    break;
+
  // MAIN CASE KİTAP ÖDÜNÇ AL
 
                 case 5:
+
+
+
 
 
 
