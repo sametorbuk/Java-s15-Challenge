@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
         Library library = new Library();
-        Librarian librarian = new Librarian("samet" );
+        Librarian librarian = new Librarian("samet");
 
 
         Object[][] novelsData = {
@@ -31,7 +31,7 @@ public class Main {
                 {9, "Leo Tolstoy", "Anna Karenina", 14.00, "2023-10-09", "Novel"},
                 {10, "Gabriel Garcia Marquez", "Yüzyıllık Yalnızlık", 18.00, "2023-10-10", "Novel"},
                 {11, "J.R.R. Tolkien", "Yüzüklerin Efendisi", 20.00, "2023-10-11", "Novel"},
-                {12, "Stephen King", "O", 15.75, "2023-10-12", "Novel"},
+                {12, "Stephen King", "Hayvan Mezarlığı", 15.75, "2023-10-12", "Novel"},
                 {13, "Agatha Christie", "Doğu Ekspresinde Cinayet", 12.50, "2023-10-13", "Novel"},
                 {14, "Harper Lee", "Bülbülü Öldürmek", 10.50, "2023-10-14", "Novel"},
                 {15, "Ray Bradbury", "Fahrenheit 451", 13.00, "2023-10-15", "Novel"},
@@ -52,18 +52,18 @@ public class Main {
                 {29, "Harper Lee", "Bülbülü Öldürmek", 10.50, "2023-10-29", "Novel"},
                 {30, "Ray Bradbury", "Mars Yıllıkları", 16.00, "2023-10-30", "Novel"}
         };
-        for(int i = 0 ; i < novelsData.length ; i++){
-           int id = (int) novelsData[i][0];
-           String author =(String) novelsData[i][1];
-           String title = (String) novelsData[i][2];
-           double price = (double) novelsData[i][3];
-           String edition = (String) novelsData[i][4];
-            String category=(String) novelsData[i][5];
+        for (int i = 0; i < novelsData.length; i++) {
+            int id = (int) novelsData[i][0];
+            String author = (String) novelsData[i][1];
+            String title = (String) novelsData[i][2];
+            double price = (double) novelsData[i][3];
+            String edition = (String) novelsData[i][4];
+            String category = (String) novelsData[i][5];
 
-            Book novel = new Novel(id , author , title , price , edition , category);
-           Library.newBook(novel);
+            Book novel = new Novel(id, author, title, price, edition, category);
+            Library.newBook(novel);
 
-            if(Library.getCategories().containsKey(novel.getCategory())){
+            if (Library.getCategories().containsKey(novel.getCategory())) {
                 Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, novel);
             } else {
@@ -71,11 +71,11 @@ public class Main {
                 Map<Integer, Book> categoryBooks = new HashMap<>();
                 categoryBooks.put(id, novel);
                 Library.getCategories().put(category, categoryBooks);
-                
+
             }
 
 
-            if(Library.getAuthors().containsKey(novel.getAuthor())){
+            if (Library.getAuthors().containsKey(novel.getAuthor())) {
                 Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, novel);
             } else {
@@ -114,18 +114,18 @@ public class Main {
         };
 
 
-        for(int i = 0 ; i < studyBooksData.length ; i++){
+        for (int i = 0; i < studyBooksData.length; i++) {
             int id = (int) studyBooksData[i][0];
-            String author =(String) studyBooksData[i][1];
+            String author = (String) studyBooksData[i][1];
             String title = (String) studyBooksData[i][2];
             double price = (double) studyBooksData[i][3];
             String edition = (String) studyBooksData[i][4];
-            String category=(String) studyBooksData[i][5];
+            String category = (String) studyBooksData[i][5];
 
-            Book studyBook = new StudyBooks(id , author , title , price , edition , category);
+            Book studyBook = new StudyBooks(id, author, title, price, edition, category);
             Library.newBook(studyBook);
 
-            if(Library.getCategories().containsKey(studyBook.getCategory())){
+            if (Library.getCategories().containsKey(studyBook.getCategory())) {
                 Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, studyBook);
             } else {
@@ -137,7 +137,7 @@ public class Main {
             }
 
 
-            if(Library.getAuthors().containsKey(studyBook.getAuthor())){
+            if (Library.getAuthors().containsKey(studyBook.getAuthor())) {
                 Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, studyBook);
             } else {
@@ -178,19 +178,19 @@ public class Main {
                 {75, "Sports Illustrated", "2024 Olimpiyatları", 5.75, "2023-10-23", "Magazine"}
         };
 
-        for(int i = 0 ; i < magazineData.length ; i++){
+        for (int i = 0; i < magazineData.length; i++) {
             int id = (int) magazineData[i][0];
-            String author =(String) magazineData[i][1];
+            String author = (String) magazineData[i][1];
             String title = (String) magazineData[i][2];
             double price = (double) magazineData[i][3];
             String edition = (String) magazineData[i][4];
-            String category=(String) magazineData[i][5];
+            String category = (String) magazineData[i][5];
 
-            Book magazine = new Magazines(id , author , title , price , edition , category);
+            Book magazine = new Magazines(id, author, title, price, edition, category);
             Library.newBook(magazine);
 
 
-            if(Library.getCategories().containsKey(magazine.getCategory())){
+            if (Library.getCategories().containsKey(magazine.getCategory())) {
                 Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, magazine);
             } else {
@@ -201,7 +201,7 @@ public class Main {
             }
 
 
-            if(Library.getAuthors().containsKey(magazine.getAuthor())){
+            if (Library.getAuthors().containsKey(magazine.getAuthor())) {
                 Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, magazine);
             } else {
@@ -225,21 +225,17 @@ public class Main {
                 {"Can", new Member_Record(31, "0532345678", "Ekin mahallesi 11", "Can", 4, "28.07.25", "Reader")},
                 {"Elif", new Member_Record(32, "0523456789", "Huzur caddesi 15", "Elif", 5, "02.02.24", "Reader")}
         };
-        for(Object[] readerData : readersData){
-            String name =(String) readerData[0];
+        for (Object[] readerData : readersData) {
+            String name = (String) readerData[0];
             Member_Record record = (Member_Record) readerData[1];
-            Library.addReader(new Reader(name,record,new ArrayList<>()));
+            Library.addReader(new Reader(name, record, new ArrayList<>()));
         }
-
-
-
-
 
 
         System.out.println("***********************");
 
 
-        Set<String> categoriesKeys=Library.getCategories().keySet();
+        Set<String> categoriesKeys = Library.getCategories().keySet();
 
         for (String key : categoriesKeys) {
             System.out.println("*****************" + key.toUpperCase() + "*****************");
@@ -257,10 +253,7 @@ public class Main {
         }
 
 
-
-
-
-        Set<String> authorKeys=Library.getAuthors().keySet();
+        Set<String> authorKeys = Library.getAuthors().keySet();
 
         for (String key : authorKeys) {
             System.out.println("*****************" + key.toUpperCase() + "*****************");
@@ -278,11 +271,11 @@ public class Main {
         }
 
 
-          Reader reader = new Reader("Samet", new Member_Record(23,
-                  "0505780213", "Akbelen mahallesi 84090." +
-                  " sokak", "Samet", 5, "04.10.24", "Reader") , new ArrayList<>());
+        Reader reader = new Reader("Samet", new Member_Record(23,
+                "0505780213", "Akbelen mahallesi 84090." +
+                " sokak", "Samet", 5, "04.10.24", "Reader"), new ArrayList<>());
 
-             reader.borrow_book(25);
+        reader.borrow_book(25);
         reader.borrow_book(35);
         reader.borrow_book(21);
         reader.borrow_book(21);
@@ -291,11 +284,11 @@ public class Main {
         reader.borrow_book(27);
 
 
-       Set<Integer> readerKeys = Library.getReaders().keySet();
+        Set<Integer> readerKeys = Library.getReaders().keySet();
 
-       for(Integer key : readerKeys){
-           System.out.println(  Library.getReaders().get(key).getRecord().toString());
-       }
+        for (Integer key : readerKeys) {
+            System.out.println(Library.getReaders().get(key).getRecord().toString());
+        }
 
         System.out.println(readerKeys.size());
 
@@ -328,7 +321,7 @@ public class Main {
             scanner.nextLine();
 
 
-            switch (choice){
+            switch (choice) {
 
 //MAİN CASE KİTAP EKLE
                 case 1:
@@ -342,26 +335,26 @@ public class Main {
                     int id = scanner.nextInt();
                     scanner.nextLine();
 
-                    while(Library.getBooks().containsKey(id)){
+                    while (Library.getBooks().containsKey(id)) {
                         System.out.println("Sistemde zaten bu id ye sahip bir kitap var başka bir id giriniz");
-                        id=scanner.nextInt();
+                        id = scanner.nextInt();
                         scanner.nextLine();
                     }
 
-                   double price = 0.0;
+                    double price = 0.0;
 
-                    while(true){
+                    while (true) {
                         System.out.println("Kitabın ücretini girin:");
-                        try{
+                        try {
 
                             price = scanner.nextDouble();
-                            if(price <= 0){
+                            if (price <= 0) {
                                 System.out.println("Lütfen pozitif bir değer girin");
-                            }else{
+                            } else {
                                 break;
                             }
 
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Lütfen geçerli bir sayı girin");
                             scanner.next();
                         }
@@ -374,81 +367,80 @@ public class Main {
                     System.out.println("Lütfen kategori girin:");
                     String category = scanner.nextLine();
 
-                    Library.newBook(new Book(id , author , title , price , edition , category));
+                    Library.newBook(new Book(id, author, title, price, edition, category));
                     System.out.println("Kitap başarıyla sisteme eklendi.");
-                     break;
+                    break;
 
 
 //MAİN CASE KİTAPLARI GÖSTER
-                     case 2:
+                case 2:
                     System.out.println("Lütfen kategori seçiniz:");
                     System.out.println("1. Magazine");
                     System.out.println("2. Study Books");
                     System.out.println("3. Novels");
 
-                    while(true){
-                        try{
+                    while (true) {
+                        try {
                             choice = scanner.nextInt();
-                            if(choice == 1 || choice == 2 || choice == 3){
+                            if (choice == 1 || choice == 2 || choice == 3) {
                                 break;
-                            } else{
+                            } else {
                                 System.out.println("Lütfen geçerli bir seçim yapınız");
                             }
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Lütfen geçerli bir değer giriniz");
                             scanner.next();
                         }
                     }
                     scanner.nextLine();
 
-                   switch (choice){
-                       case 1:
-                           System.out.println("***********************************");
-                           System.out.println("************MAGAZINES**************");
-                           System.out.println("***********************************");
+                    switch (choice) {
+                        case 1:
+                            System.out.println("***********************************");
+                            System.out.println("************MAGAZINES**************");
+                            System.out.println("***********************************");
 
-                           HashMap<Integer, Book> magazineBooks = new HashMap<>(Library.getCategories().get("Magazine"));
+                            HashMap<Integer, Book> magazineBooks = new HashMap<>(Library.getCategories().get("Magazine"));
 
-                           Set<Integer> magazineBookKeys= magazineBooks.keySet();
+                            Set<Integer> magazineBookKeys = magazineBooks.keySet();
 
-                           for(Integer key : magazineBookKeys){
-                               System.out.println(magazineBooks.get(key).toString());
-                           }
-                           break;
+                            for (Integer key : magazineBookKeys) {
+                                System.out.println(magazineBooks.get(key).toString());
+                            }
+                            break;
 
-                       case 2:
-                           System.out.println("***********************************");
-                           System.out.println("************STUDY BOOKS**************");
-                           System.out.println("***********************************");
+                        case 2:
+                            System.out.println("***********************************");
+                            System.out.println("************STUDY BOOKS**************");
+                            System.out.println("***********************************");
 
-                           HashMap<Integer, Book> studyBooks = new HashMap<>(Library.getCategories().get("StudyBook"));
+                            HashMap<Integer, Book> studyBooks = new HashMap<>(Library.getCategories().get("StudyBook"));
 
-                           Set<Integer> studyBooksKeys= studyBooks.keySet();
+                            Set<Integer> studyBooksKeys = studyBooks.keySet();
 
-                           for(Integer key : studyBooksKeys){
-                               System.out.println(studyBooks.get(key).toString());
-                           }
-                           break;
+                            for (Integer key : studyBooksKeys) {
+                                System.out.println(studyBooks.get(key).toString());
+                            }
+                            break;
 
 
-                       case 3:
+                        case 3:
 
-                           System.out.println("***********************************");
-                           System.out.println("************NOVELS**************");
-                           System.out.println("***********************************");
+                            System.out.println("***********************************");
+                            System.out.println("************NOVELS**************");
+                            System.out.println("***********************************");
 
-                           HashMap<Integer, Book> novels = new HashMap<>(Library.getCategories().get("Novel"));
+                            HashMap<Integer, Book> novels = new HashMap<>(Library.getCategories().get("Novel"));
 
-                           Set<Integer> novelsKeys= novels.keySet();
+                            Set<Integer> novelsKeys = novels.keySet();
 
-                           for(Integer key : novelsKeys){
-                               System.out.println(novels.get(key).toString());
-                           }
-                           break;
+                            for (Integer key : novelsKeys) {
+                                System.out.println(novels.get(key).toString());
+                            }
+                            break;
 
-                   }
+                    }
                     break;
-
 
 
 //MAİN CASE KİTAP GÜNCELLE
@@ -459,33 +451,33 @@ public class Main {
                     System.out.println("1. ID ye göre seç");
                     System.out.println("2. Başlığa göre seç");
 
-                    while(true){
-                        try{
-                            choice=scanner.nextInt();
-                            if(choice == 1 || choice == 2){
+                    while (true) {
+                        try {
+                            choice = scanner.nextInt();
+                            if (choice == 1 || choice == 2) {
                                 break;
-                            }else{
+                            } else {
                                 System.out.println("Lütfen geçerli bir seçim yapınız ");
                             }
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Lütfen geçerli bir değer giriniz");
                             scanner.next();
                         }
                     }
                     scanner.nextLine();
-                    if(choice == 1){
+                    if (choice == 1) {
                         System.out.println("Lütfen güncellemek istediğiniz kitabın id sini girin:");
 
                         int bookId = scanner.nextInt();
 
-                        while(!Library.getBooks().containsKey(bookId)){
+                        while (!Library.getBooks().containsKey(bookId)) {
                             System.out.println("Sistemde  bu id ye sahip bir kitap yok id nin doğru olduğundan emin misiniz ?");
-                            bookId=scanner.nextInt();
+                            bookId = scanner.nextInt();
                             scanner.nextLine();
                         }
 
-                        if(Library.getBooks().containsKey(bookId)){
-                              scanner.nextLine();
+                        if (Library.getBooks().containsKey(bookId)) {
+                            scanner.nextLine();
 
                             System.out.println("Kitabın yeni ismini girin:");
                             String newTitle = scanner.nextLine();
@@ -496,18 +488,18 @@ public class Main {
 
                             double priceOfBook = 0.0;
 
-                            while(true){
+                            while (true) {
                                 System.out.println("Kitabın yeni ücretini girin:");
-                                try{
+                                try {
 
                                     priceOfBook = scanner.nextDouble();
-                                    if(priceOfBook <= 0){
+                                    if (priceOfBook <= 0) {
                                         System.out.println("Lütfen pozitif bir değer girin");
-                                    }else{
+                                    } else {
                                         break;
                                     }
 
-                                }catch (InputMismatchException e){
+                                } catch (InputMismatchException e) {
                                     System.out.println("Lütfen geçerli bir sayı girin");
                                     scanner.next();
                                 }
@@ -528,13 +520,13 @@ public class Main {
                             book.setEdition(newEdition);
                             book.setCategory(newCategory);
 
-                            System.out.println( bookId + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
+                            System.out.println(bookId + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
 
-                        } else{
+                        } else {
                             System.out.println("Sistemde böyle bir kitap bulunmuyor id yi doğru girin.");
                         }
 
-                    } else if(choice == 2){
+                    } else if (choice == 2) {
                         System.out.println("Güncellemek  istediğiniz kitabın başlığını girin");
                         String titleInput = scanner.nextLine();
                         String cleanedInput = titleInput.replaceAll("[\\s+,.!?:;]", "");
@@ -551,18 +543,18 @@ public class Main {
 
                                 double priceOfBook = 0.0;
 
-                                while(true){
+                                while (true) {
                                     System.out.println("Kitabın yeni ücretini girin:");
-                                    try{
+                                    try {
 
                                         priceOfBook = scanner.nextDouble();
-                                        if(priceOfBook <= 0){
+                                        if (priceOfBook <= 0) {
                                             System.out.println("Lütfen pozitif bir değer girin");
-                                        }else{
+                                        } else {
                                             break;
                                         }
 
-                                    }catch (InputMismatchException e){
+                                    } catch (InputMismatchException e) {
                                         System.out.println("Lütfen geçerli bir sayı girin");
                                         scanner.next();
                                     }
@@ -582,7 +574,7 @@ public class Main {
                                 book.setEdition(newEdition);
                                 book.setCategory(newCategory);
 
-                                System.out.println( book.getId() + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
+                                System.out.println(book.getId() + " " + " ID Lİ KİTAP BİLGİLERİ BAŞARIYLA GÜNCELLENDİ");
 
                                 bookFound = true;
                             }
@@ -596,7 +588,6 @@ public class Main {
                     break;
 
 
-
 //MAİN CASE KİTAP SİL
                 case 4:
 
@@ -604,32 +595,32 @@ public class Main {
                     System.out.println("1. ID ile sil");
                     System.out.println("2. Başlık ile sil");
 
-                    while(true){
-                        try{
-                            choice=scanner.nextInt();
-                            if(choice == 1 || choice == 2){
+                    while (true) {
+                        try {
+                            choice = scanner.nextInt();
+                            if (choice == 1 || choice == 2) {
                                 break;
-                            }else{
+                            } else {
                                 System.out.println("Lütfen geçerli bir seçim yapınız ");
                             }
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Lütfen geçerli bir değer giriniz");
                             scanner.next();
                         }
                     }
                     scanner.nextLine();
-                    if(choice == 1){
+                    if (choice == 1) {
                         System.out.println("Lütfen silmek istediğiniz kitabın id sini girin:");
                         int bookId = scanner.nextInt();
 
-                        if(Library.getBooks().containsKey(bookId)){
+                        if (Library.getBooks().containsKey(bookId)) {
                             Library.deleteBook(bookId);
 
-                        } else{
+                        } else {
                             System.out.println("Sistemde böyle bir kitap bulunmuyor id yi doğru girin.");
                         }
 
-                    } else if(choice == 2){
+                    } else if (choice == 2) {
                         System.out.println("Silmek istediğiniz kitabın başlığını girin");
                         String titleInput = scanner.nextLine();
                         String cleanedInput = titleInput.replaceAll("[\\s+,.!?:;]", "");
@@ -652,35 +643,101 @@ public class Main {
 
                     break;
 
- // MAIN CASE KİTAP ÖDÜNÇ AL
+                // MAIN CASE KİTAP ÖDÜNÇ AL
 
                 case 5:
+                    System.out.println("Kitabı hangi verisine göre seçmek istersiniz?");
+                    System.out.println("1. ID ile seç");
+                    System.out.println("2. Başlık ile seç");
 
+                    while (true) {
+                        try {
+                            choice = scanner.nextInt();
+                            if (choice == 1 || choice == 2) {
+                                break;
+                            } else {
+                                System.out.println("Lütfen geçerli bir seçim yapınız.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Lütfen geçerli bir değer giriniz.");
+                            scanner.next();
+                        }
+                    }
+                    scanner.nextLine();
 
+                    if (choice == 1) {
+                        while (true) {
+                            System.out.println("Lütfen ödünç almak istediğiniz kitabın ID'sini girin:");
+                            int bookId = scanner.nextInt();
 
+                            if (Library.getBooks().containsKey(bookId)) {
+                                Book selectedBook = Library.getBooks().get(bookId);
+                                System.out.println("Almak istediğiniz kitap: " + selectedBook.toString());
 
+                                if (!selectedBook.isAvailable()) {
+                                    System.out.println("Almak istediğiniz kitap şu an " + selectedBook.getOwner() + " adlı üyede olduğu için kitabı alamazsınız.");
+                                    System.out.println("Lütfen başka bir kitap ID'si giriniz.");
+                                    continue;
+                                }
 
+                                while (true) {
+                                    System.out.println("Lütfen kullanıcı ID'nizi giriniz, kitabı kendi adınıza mı alacaksınız?");
+                                    int readerId = scanner.nextInt();
 
+                                    if (Library.getReaders().containsKey(readerId)) {
+                                        Reader person = Library.getReaders().get(readerId);
+                                        person.borrow_book(selectedBook.getId());
+                                        System.out.println("Kitap başarıyla ödünç alındı.");
+                                        break;
+                                    } else {
+                                        System.out.println("Sistemde böyle bir kullanıcı bulunmuyor, lütfen ID'yi doğru girin.");
+                                    }
+                                }
+                                break;
+                            } else {
+                                System.out.println("Sistemde böyle bir kitap bulunmuyor, ID'yi doğru girin.");
+                            }
+                        }
+                    } else if (choice == 2) {
+                        System.out.println("Ödünç almak istediğiniz kitabın başlığını girin:");
+                        String titleInput = scanner.nextLine();
+                        String cleanedInput = titleInput.replaceAll("[\\s+,.!?:;]", "").toLowerCase();
 
+                        boolean bookFound = false;
+                        for (Book book : Library.getBooks().values()) {
+                            String cleanedTitle = book.getTitle().replaceAll("[\\s+,.!?:;]", "").toLowerCase();
+                            if (cleanedTitle.contains(cleanedInput) && book.isAvailable()) {
+                                System.out.println("Bulunan kitap: " + book.toString());
 
+                                while (true) {
+                                    System.out.println("Lütfen kullanıcı ID'nizi giriniz, kitabı kendi adınıza mı alacaksınız?");
+                                    int readerId = scanner.nextInt();
 
+                                    if (Library.getReaders().containsKey(readerId)) {
+                                        Reader person = Library.getReaders().get(readerId);
+                                        person.borrow_book(book.getId());
+                                        System.out.println("Kitap başarıyla ödünç alındı.");
+                                        bookFound = true;
+                                        break;
+                                    } else {
+                                        System.out.println("Sistemde böyle bir kullanıcı bulunmuyor, lütfen ID'yi doğru girin.");
+                                    }
+                                }
+                                break;
+                            }
+                        }
 
-
+                        if (!bookFound) {
+                            System.out.println("Sistemde böyle bir kitap yok, lütfen tekrar deneyin.");
+                        }
+                    }
+                    break;
 
                 default:
                     System.out.println("Lütfen seçimizi düzgün yapın.");
             }
 
         }
-
-
-
-
-
-
-
-
-
 
 
     }

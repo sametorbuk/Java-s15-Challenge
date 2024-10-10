@@ -17,58 +17,58 @@ public class Librarian extends Person {
     }
 
 
-    public void verifyMember(String name){
+    public void verifyMember(String name) {
         boolean userFound = false;
 
-        for(Object obj : Library.getReaders().values()){
+        for (Object obj : Library.getReaders().values()) {
             Reader reader = (Reader) obj;
-            if(reader.getName().contains(name.toLowerCase())){
+            if (reader.getName().contains(name.toLowerCase())) {
                 System.out.println("There is such a user");
-                userFound=true;
+                userFound = true;
                 break;
             }
         }
 
-        if(!userFound){
+        if (!userFound) {
             System.out.println("There is no such record");
         }
     }
 
-    public void newBook(Book book){
+    public void newBook(Book book) {
         Library.newBook(book);
     }
 
-    public void deleteBook(int id){
+    public void deleteBook(int id) {
         Library.deleteBook(id);
     }
 
 
-    public void searchBook(String bookTitle){
+    public void searchBook(String bookTitle) {
         boolean bookFound = false;
 
-        for(Object obj : Library.getBooks().values()){
+        for (Object obj : Library.getBooks().values()) {
             Book book = (Book) obj;
-            if(book.getTitle().contains(bookTitle.toLowerCase())){
+            if (book.getTitle().contains(bookTitle.toLowerCase())) {
                 System.out.println(book);
-                bookFound=true;
+                bookFound = true;
                 break;
             }
         }
 
-        if(!bookFound){
+        if (!bookFound) {
             System.out.println("There is no such book");
         }
 
     }
 
 
-    public boolean isThereAbook(String bookTitle){
+    public boolean isThereAbook(String bookTitle) {
 
-        for(Object obj : Library.getBooks().values()){
+        for (Object obj : Library.getBooks().values()) {
             Book book = (Book) obj;
-            if(book.getTitle().contains(bookTitle.toLowerCase())){
+            if (book.getTitle().contains(bookTitle.toLowerCase())) {
 
-              return true;
+                return true;
             }
         }
 
@@ -77,54 +77,43 @@ public class Librarian extends Person {
     }
 
 
-
-
-
-
-
-
-    public void searchBook(int book_id){
+    public void searchBook(int book_id) {
         boolean bookFound = false;
 
-        for(Object obj : Library.getBooks().values()){
+        for (Object obj : Library.getBooks().values()) {
             Book book = (Book) obj;
-            if(book.getId() == book_id){
+            if (book.getId() == book_id) {
                 System.out.println(book.toString());
-                bookFound=true;
+                bookFound = true;
                 break;
             }
         }
 
-        if(!bookFound){
+        if (!bookFound) {
             System.out.println("There is no book with this id");
         }
 
     }
 
 
-    public void updateBook(int book_id , Book uptadeInfo){
+    public void updateBook(int book_id, Book uptadeInfo) {
         boolean bookFound = false;
 
-        for(Object obj : Library.getBooks().values()){
+        for (Object obj : Library.getBooks().values()) {
             Book book = (Book) obj;
-            if(book.getId() == book_id){
+            if (book.getId() == book_id) {
                 System.out.println(book.toString());
-                Library.updateBook(book_id , uptadeInfo);
-                bookFound=true;
+                Library.updateBook(book_id, uptadeInfo);
+                bookFound = true;
                 break;
             }
         }
 
-        if(!bookFound){
+        if (!bookFound) {
             System.out.println("There is no book with this id");
         }
 
     }
-
-
-
-
-
 
 
 }

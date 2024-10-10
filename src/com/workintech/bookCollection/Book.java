@@ -20,7 +20,7 @@ public class Book {
         this.category = category;
     }
 
-    public Book(int id, String author, String title, double price, String edition , String category) {
+    public Book(int id, String author, String title, double price, String edition, String category) {
 
         if (Library.getBooks().containsKey(id)) {
             throw new IllegalArgumentException("A book with ID " + id +
@@ -33,7 +33,7 @@ public class Book {
         this.price = price;
         this.edition = edition;
         this.available = true;
-        this.category=category;
+        this.category = category;
 
 
     }
@@ -59,7 +59,6 @@ public class Book {
     }
 
 
-
     public String getEdition() {
         return edition;
     }
@@ -79,7 +78,6 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
-
 
 
     public void setEdition(String edition) {

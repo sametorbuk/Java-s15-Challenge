@@ -26,7 +26,7 @@ public class Reader extends Person {
         this.books = books;
     }
 
-    public void  purchase_book(){
+    public void purchase_book() {
 
     }
 
@@ -36,35 +36,35 @@ public class Reader extends Person {
 
     public void borrow_book(Book book) {
 
-       if(book.isAvailable() && books.size() < 5){
-           books.add(book);
-           book.setAvailable(false);
-           book.setOwner(record.getName());
-           System.out.println("Kitap başarıyla kişiye ödünç verildi");
-           System.out.println("Hesabınızdan" + " " + book.getPrice() + "TL tahsil edildi");
-       } else if(!book.isAvailable()) {
-           System.out.println("Bu kitap şuan " + book.getOwner() + " adlı üyede olduğu için ödünç alamazsınız");
-       } else if(book.isAvailable() && books.size() == 5){
-           System.out.println("Kullanıcı alabileceği kitap  limitine zaten ulaşmıştır");
-       }
+        if (book.isAvailable() && books.size() < 5) {
+            books.add(book);
+            book.setAvailable(false);
+            book.setOwner(record.getName());
+            System.out.println("Kitap başarıyla kişiye ödünç verildi");
+            System.out.println("Hesabınızdan" + " " + book.getPrice() + "TL tahsil edildi");
+        } else if (!book.isAvailable()) {
+            System.out.println("Bu kitap şuan " + book.getOwner() + " adlı üyede olduğu için ödünç alamazsınız");
+        } else if (book.isAvailable() && books.size() == 5) {
+            System.out.println("Kullanıcı alabileceği kitap  limitine zaten ulaşmıştır");
+        }
     }
 
     public void borrow_book(int id) {
         Book book = (Book) Library.getBooks().get(id);
-        if(books.size() < 5){
+        if (books.size() < 5) {
 
-            if(Library.getBooks().containsKey(id) && book.isAvailable() ){
+            if (Library.getBooks().containsKey(id) && book.isAvailable()) {
                 books.add(book);
                 book.setAvailable(false);
                 book.setOwner(getName());
-                System.out.println("Kitap başarıyla kişiye ödünç verildi");
-            }else if(Library.getBooks().containsKey(id) && !book.isAvailable()){
+                System.out.println("Kitap başarıyla" + " " + getName() + " adlı kişiye ödünç verildi");
+            } else if (Library.getBooks().containsKey(id) && !book.isAvailable()) {
                 System.out.println("Bu kitap şuan " + book.getOwner() + " adlı üyede olduğu için ödünç alamazsınız");
-            } else if(!Library.getBooks().containsKey(id)){
+            } else if (!Library.getBooks().containsKey(id)) {
                 System.out.println("Sistemde böyle bir kitap bulunmamaktadır");
             }
 
-        } else{
+        } else {
             System.out.println("Kullanıcı alabileceği kitap limitine ulaşmıştır");
         }
 
@@ -72,38 +72,39 @@ public class Reader extends Person {
 
 
     public void borrow_book(String bookTitle) {
-         String cleanedInput = bookTitle.replaceAll("[\\s+,.!?:;]", "");
-         Set<Integer> keys = Library.getBooks().keySet();
-         if(books.size() < 5){
-             for(Integer key : keys){
-                 String title = Library.getBooks().get(key).getTitle().replaceAll("[\\s+,.!?:;]", "").toLowerCase();
-               Book book = Library.getBooks().get(key);
-                 if(title.contains(cleanedInput) && book.isAvailable() ){
-                     books.add(book);
-                     book.setAvailable(false);
-                     book.setOwner(getName());
-                     System.out.println("Kitap başarıyla kişiye ödünç verildi");
-                 } else{
-                     System.out.println("Sistemde böyle bir kitap bulunamadı");
-                 }
-             }
-        }else {
+        String cleanedInput = bookTitle.replaceAll("[\\s+,.!?:;]", "");
+        Set<Integer> keys = Library.getBooks().keySet();
+        if (books.size() < 5) {
+            for (Integer key : keys) {
+                String title = Library.getBooks().get(key).getTitle().replaceAll("[\\s+,.!?:;]", "").toLowerCase();
+                Book book = Library.getBooks().get(key);
+                if (title.contains(cleanedInput) && book.isAvailable()) {
+                    books.add(book);
+                    book.setAvailable(false);
+                    book.setOwner(getName());
+                    System.out.println("Kitap başarıyla kişiye ödünç verildi");
+                } else if (title.contains(cleanedInput) && !book.isAvailable()) {
+
+                    System.out.println("Kitap şuan" + book.getOwner() + " " + "adlı kişide olduğu için kitabı ödünç alamazsınız.");
+
+                } else {
+                    System.out.println("Sistemde böyle bir kitap bulunamadı");
+                }
+            }
+        } else {
             System.out.println("Kullanıcı alabileceği kitap limitine zaten ulaşmıştır");
         }
 
     }
 
 
-
-
-
-    public void return_book(Book book){
+    public void return_book(Book book) {
         books.remove(book);
     }
 
-    public void return_book(int id){
-        for(Book book : books){
-            if(book.getId() == id){
+    public void return_book(int id) {
+        for (Book book : books) {
+            if (book.getId() == id) {
                 books.remove(book);
                 System.out.println("Kitap iadesi başarıyla alındı teşekkürler");
             } else {
@@ -112,8 +113,8 @@ public class Reader extends Person {
         }
     }
 
-    public void show_book(){
-        for(Object book:books){
+    public void show_book() {
+        for (Object book : books) {
             System.out.println(book);
         }
     }
@@ -121,7 +122,7 @@ public class Reader extends Person {
 
     @Override
     public String whoYouAre() {
-        return   super.whoYouAre() + ">>>> Title >>>> Reader";
+        return super.whoYouAre() + ">>>> Title >>>> Reader";
     }
 
 
@@ -132,10 +133,6 @@ public class Reader extends Person {
                 ", record=" + record +
                 '}';
     }
-
-
-
-
 
 
 }
