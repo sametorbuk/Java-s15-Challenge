@@ -70,11 +70,11 @@ public class Main {
 
             }
             if (Library.getAuthors().containsKey(novel.getAuthor())) {
-                Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
+                Map<Integer, Book> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, novel);
             } else {
 
-                Map<Integer, Object> authorBooks = new HashMap<>();
+                Map<Integer, Book> authorBooks = new HashMap<>();
                 authorBooks.put(id, novel);
                 Library.getAuthors().put(author, authorBooks);
 
@@ -132,11 +132,11 @@ public class Main {
 
 
             if (Library.getAuthors().containsKey(studyBook.getAuthor())) {
-                Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
+                Map<Integer, Book> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, studyBook);
             } else {
 
-                Map<Integer, Object> authorBooks = new HashMap<>();
+                Map<Integer, Book> authorBooks = new HashMap<>();
                 authorBooks.put(id, studyBook);
                 Library.getAuthors().put(author, authorBooks);
 
@@ -196,11 +196,11 @@ public class Main {
 
 
             if (Library.getAuthors().containsKey(magazine.getAuthor())) {
-                Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
+                Map<Integer, Book> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, magazine);
             } else {
 
-                Map<Integer, Object> authorBooks = new HashMap<>();
+                Map<Integer, Book> authorBooks = new HashMap<>();
                 authorBooks.put(id, magazine);
                 Library.getAuthors().put(author, authorBooks);
 
@@ -252,7 +252,7 @@ public class Main {
         for (String key : authorKeys) {
             System.out.println("*****************" + key.toUpperCase() + "*****************");
 
-            Map<Integer, Object> authorMap = Library.getAuthors().get(key);
+            Map<Integer, Book> authorMap = Library.getAuthors().get(key);
             if (authorMap != null) {
                 Set<Integer> bookKeys = authorMap.keySet();
 
@@ -276,6 +276,8 @@ public class Main {
 
         System.out.println(readerKeys.size());
 
+
+
         System.out.println("********************************************************");
         System.out.println("********************************************************");
         System.out.println("********************************************************");
@@ -296,7 +298,8 @@ public class Main {
             System.out.println("4. Kitap Sil");
             System.out.println("5. Kitap Ödünç Al");
             System.out.println("6. Kitap Geri İade Et");
-            System.out.println("7. Çıkış");
+            System.out.println("7. Bir yazara ait kitapları listele");
+            System.out.println("8. Çıkış");
             System.out.print("Seçiminizi yapın: ");
             choice = scanner.nextInt();
 
@@ -780,8 +783,62 @@ public class Main {
 
                     break;
 
+
+
+                    //MAIN CASE >>> BİR YAZARA AİT KİTAPLARI LİSTELE
+
+                case 7:
+
+                    System.out.println("Lütfen yazar adı giriniz:");
+
+                    String authorName = scanner.nextLine();
+
+
+                    while(true){
+                        try{
+                            String cleanedAuthorName = authorName.replaceAll("[\\p{Punct}\\s]", "").toLowerCase();
+
+                            Set<String> autorsNamesAtTheLibrary = Library.getAuthors().keySet();
+
+                            boolean authorFound = false;
+
+                            for(String name : autorsNamesAtTheLibrary){
+                                String cleanedName = name.replaceAll("[\\p{Punct}\\s]", "").toLowerCase();
+                                if(cleanedName.contains(cleanedAuthorName)){
+                                    Set<Integer>  booksOfAuthorKeySet = Library.getAuthors().get(name).keySet();
+                                    for(Integer key : booksOfAuthorKeySet){
+                                        System.out.println( Library.getAuthors().get(name).get(key).getTitle());
+                                    }
+                                    authorFound = true;
+                                    break;
+
+                                }
+                            }
+
+                            if (!authorFound) {
+                                System.out.println("Böyle bir yazar bulunamadı.");
+                            }
+
+
+                            System.out.println("Lütfen yazar adı giriniz:");
+                            authorName = scanner.nextLine();
+
+
+                        } catch (InputMismatchException e){
+                            System.out.println("Lütfen geçerli bir değer giriniz.");
+                            scanner.next();
+
+                        }
+
+
+                    }
+
+
+
+
+
                 default:
-                    System.out.println("Lütfen tekrar deneyin.");
+                    System.out.println("Lütfen geçerli bir seçim yapın.");
             }
 
         }

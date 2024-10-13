@@ -10,7 +10,7 @@ import java.util.Set;
 public class Library {
     private static Map<Integer , Book> books;
     private static Map<Integer , Reader> readers;
-    private  static Map<String , Map<Integer , Object>> authors;
+    private  static Map<String , Map<Integer , Book>> authors;
     private static Map<String , Map<Integer , Book>> categories;
 
 
@@ -29,7 +29,7 @@ public class Library {
         Library.authors = new HashMap<>();
     }
 
-    public Library(Map<Integer, Book> books,Map<String , Map<Integer , Object>> authors) {
+    public Library(Map<Integer, Book> books,Map<String , Map<Integer , Book>> authors) {
         this.books = books;
         this.authors = authors;
     }
@@ -42,7 +42,7 @@ public class Library {
         return readers;
     }
 
-    public  static Map<String , Map<Integer , Object>> getAuthors() {
+    public  static Map<String , Map<Integer , Book>> getAuthors() {
         return authors;
     }
 
@@ -50,7 +50,7 @@ public class Library {
         Library.books = books;
     }
 
-    public static void setAuthors(Map<String , Map<Integer , Object>> authors) {
+    public static void setAuthors(Map<String , Map<Integer , Book>> authors) {
         Library.authors = authors;
     }
 
