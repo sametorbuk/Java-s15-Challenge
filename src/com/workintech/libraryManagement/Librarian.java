@@ -39,7 +39,11 @@ public class Librarian extends Person {
     }
 
     public void deleteBook(int id) {
-        Library.deleteBook(id);
+      if(Library.getBooks().containsKey(id)){
+          Library.deleteBook(id);
+      }else {
+          System.out.println("There is no book with this id");
+      }
     }
 
 
@@ -123,6 +127,15 @@ public class Librarian extends Person {
         } else if (!Library.getReaders().containsKey(readerId)) {
             System.out.println("Sistemde böyle bir kullanıcı bulunamadı.");
         }
+    }
+
+
+    public void returnBook(Book book , int readerId){
+        Reader reader = Library.getReaders().get(readerId);
+        reader.return_book(book);
+        book.setAvailable(true);
+        book.setOwner(null);
+        System.out.println(reader.getName() + " adlı kullanıcıya " + book.getPrice() + " TL iade edildi.");
     }
 
 

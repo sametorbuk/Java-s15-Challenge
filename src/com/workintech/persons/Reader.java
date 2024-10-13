@@ -26,9 +26,7 @@ public class Reader extends Person {
         this.books = books;
     }
 
-    public void purchase_book() {
 
-    }
 
     public Member_Record getRecord() {
         return record;

@@ -265,17 +265,7 @@ public class Main {
         }
 
 
-        Reader reader = new Reader("Samet", new Member_Record(23,
-                "0505780213", "Akbelen mahallesi 84090." +
-                " sokak", "Samet", 5, "04.10.24", "Reader"), new ArrayList<>());
 
-        reader.borrow_book(25);
-        reader.borrow_book(35);
-        reader.borrow_book(21);
-        reader.borrow_book(21);
-        reader.borrow_book(23);
-        reader.borrow_book(26);
-        reader.borrow_book(27);
 
 
         Set<Integer> readerKeys = Library.getReaders().keySet();
@@ -682,6 +672,7 @@ public class Main {
                                         Reader person = Library.getReaders().get(readerId);
                                         person.borrow_book(selectedBook.getId());
                                         System.out.println("Kitap " + person.getName()  +" adına başarıyla ödünç alındı.");
+                                        librarian.createBill(bookId , person.getRecord().getMember_id());
                                         break;
                                     } else {
                                         System.out.println("Sistemde böyle bir kullanıcı bulunmuyor, lütfen ID'yi doğru girin.");
@@ -711,6 +702,7 @@ public class Main {
                                         Reader person = Library.getReaders().get(readerId);
                                         person.borrow_book(book.getId());
                                         System.out.println("Kitap başarıyla ödünç alındı.");
+                                        librarian.createBill(book.getId() , person.getRecord().getMember_id());
                                         bookFound = true;
                                         break;
                                     } else {
@@ -732,9 +724,64 @@ public class Main {
                 // MAIN CASE GERİ İADE ET
 
 
+                case 6:
+                    System.out.println("Lütfen iade etmek istediğiniz kitabın adını ve kullanıcı id nizi giriniz ");
+                    System.out.println("****************");
+                    System.out.println("****************");
+                    System.out.println("Lütfen önce kullanıcı id nizi giriniz:");
+
+
+
+                    int readerId = 0;
+
+                    while (true) {
+                        try {
+                            readerId = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (Library.getReaders().containsKey(readerId) && Library.getReaders().get(readerId).getBooks().size() == 0) {
+                                System.out.println("Bu kullanıcıda herhangi bir kitap bulunmamaktadır. Lütfen listesinde kitap bulunan bir kullanıcı seçiniz");
+
+                            } else if(Library.getReaders().containsKey(readerId)){
+                               break;
+                            } else {
+                                System.out.println("Bu ID'ye sahip bir kullanıcı yok, lütfen geçerli bir ID giriniz.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Lütfen geçerli bir değer giriniz.");
+                            scanner.next();
+                        }
+                    }
+
+
+
+                    System.out.println("Lütfen iade etmek istediğiniz kitabın adını giriniz:");
+                    String bookTitle = scanner.nextLine();
+
+
+                    String cleanedBookTitle = bookTitle.replaceAll("[\\p{Punct}\\s]", "").toLowerCase();
+
+                    boolean bookFound = false;
+
+
+                    for (Book book : Library.getReaders().get(readerId).getBooks()) {
+                        String cleanedTitle = book.getTitle().replaceAll("[\\p{Punct}\\s]", "").toLowerCase();
+                        if (cleanedTitle.contains(cleanedBookTitle)) {
+                            librarian.returnBook(book, readerId);
+                            System.out.println("İşlem başarılı!");
+                            bookFound = true;
+                            break;
+                        }
+                    }
+
+                    if (!bookFound) {
+                        System.out.println("Bu kullanıcıya ait böyle bir kitap bulunamadı.");
+                    }
+
+                    break;
 
                 default:
-                    System.out.println("Lütfen seçimizi düzgün yapın.");
+                    System.out.println("Lütfen tekrar deneyin.");
             }
 
         }
