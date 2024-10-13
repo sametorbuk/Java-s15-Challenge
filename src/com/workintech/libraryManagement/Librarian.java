@@ -39,11 +39,11 @@ public class Librarian extends Person {
     }
 
     public void deleteBook(int id) {
-      if(Library.getBooks().containsKey(id)){
-          Library.deleteBook(id);
-      }else {
-          System.out.println("There is no book with this id");
-      }
+        if (Library.getBooks().containsKey(id)) {
+            Library.deleteBook(id);
+        } else {
+            System.out.println("There is no book with this id");
+        }
     }
 
 
@@ -119,9 +119,9 @@ public class Librarian extends Person {
 
     }
 
-    public void createBill(int bookId , int readerId){
-        if(Library.getBooks().containsKey(bookId) && Library.getReaders().containsKey(readerId)){
-            System.out.println("Hesabınızdan " + Library.getBooks().get(bookId).getPrice() + "TL ücret alındı bizi tercih ettiğiniz için teşekkürler." );
+    public void createBill(int bookId, int readerId) {
+        if (Library.getBooks().containsKey(bookId) && Library.getReaders().containsKey(readerId)) {
+            System.out.println("Hesabınızdan " + Library.getBooks().get(bookId).getPrice() + "TL ücret alındı bizi tercih ettiğiniz için teşekkürler.");
         } else if (!Library.getBooks().containsKey(bookId)) {
             System.out.println("Sistemde böyle bir kitap bulunamadı.");
         } else if (!Library.getReaders().containsKey(readerId)) {
@@ -130,7 +130,7 @@ public class Librarian extends Person {
     }
 
 
-    public void returnBook(Book book , int readerId){
+    public void returnBook(Book book, int readerId) {
         Reader reader = Library.getReaders().get(readerId);
         reader.return_book(book);
         book.setAvailable(true);

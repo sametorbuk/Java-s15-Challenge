@@ -10,17 +10,16 @@ public class Author extends Person {
     private Member_Record record;
 
 
-
     public Author(String name) {
         super(name);
     }
 
-    public void  new_book(){
+    public void new_book() {
 
     }
 
-    public void show_book(){
-        for(Object book : books){
+    public void show_book() {
+        for (Object book : books) {
             System.out.println(book);
         }
     }
@@ -28,9 +27,8 @@ public class Author extends Person {
 
     @Override
     public String whoYouAre() {
-        return   super.whoYouAre() + ">>>> Title >>>> Author";
+        return super.whoYouAre() + ">>>> Title >>>> Author";
     }
-
 
 
 }

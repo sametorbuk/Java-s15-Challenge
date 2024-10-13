@@ -27,7 +27,6 @@ public class Reader extends Person {
     }
 
 
-
     public Member_Record getRecord() {
         return record;
     }
