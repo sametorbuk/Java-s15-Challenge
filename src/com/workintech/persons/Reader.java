@@ -84,9 +84,7 @@ public class Reader extends Person {
                     book.setOwner(getName());
                     System.out.println("Kitap başarıyla kişiye ödünç verildi");
                 } else if (title.contains(cleanedInput) && !book.isAvailable()) {
-
                     System.out.println("Kitap şuan" + book.getOwner() + " " + "adlı kişide olduğu için kitabı ödünç alamazsınız.");
-
                 } else {
                     System.out.println("Sistemde böyle bir kitap bulunamadı");
                 }

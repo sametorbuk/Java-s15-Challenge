@@ -115,5 +115,15 @@ public class Librarian extends Person {
 
     }
 
+    public void createBill(int bookId , int readerId){
+        if(Library.getBooks().containsKey(bookId) && Library.getReaders().containsKey(readerId)){
+            System.out.println("Hesabınızdan " + Library.getBooks().get(bookId).getPrice() + "TL ücret alındı bizi tercih ettiğiniz için teşekkürler." );
+        } else if (!Library.getBooks().containsKey(bookId)) {
+            System.out.println("Sistemde böyle bir kitap bulunamadı.");
+        } else if (!Library.getReaders().containsKey(readerId)) {
+            System.out.println("Sistemde böyle bir kullanıcı bulunamadı.");
+        }
+    }
+
 
 }

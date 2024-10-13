@@ -58,23 +58,17 @@ public class Main {
             String title = (String) novelsData[i][2];
             double price = (double) novelsData[i][3];
             String edition = (String) novelsData[i][4];
-            String category = (String) novelsData[i][5];
-
-            Book novel = new Novel(id, author, title, price, edition, category);
+            String category = (String) novelsData[i][5];Book novel = new Novel(id, author, title, price, edition, category);
             Library.newBook(novel);
-
             if (Library.getCategories().containsKey(novel.getCategory())) {
                 Map<Integer, Book> categoryBooks = Library.getCategories().get(category);
                 categoryBooks.put(id, novel);
             } else {
-
                 Map<Integer, Book> categoryBooks = new HashMap<>();
                 categoryBooks.put(id, novel);
                 Library.getCategories().put(category, categoryBooks);
 
             }
-
-
             if (Library.getAuthors().containsKey(novel.getAuthor())) {
                 Map<Integer, Object> authorBooks = Library.getAuthors().get(author);
                 authorBooks.put(id, novel);
@@ -296,9 +290,7 @@ public class Main {
         System.out.println("********************************************************");
         System.out.println("********************************************************");
         System.out.println("********************************************************");
-        System.out.println("********************************************************");
-        System.out.println("********************************************************");
-        System.out.println("********************************************************");
+
 
 
         Scanner scanner = new Scanner(System.in);
@@ -643,7 +635,9 @@ public class Main {
 
                     break;
 
+
                 // MAIN CASE KİTAP ÖDÜNÇ AL
+
 
                 case 5:
                     System.out.println("Kitabı hangi verisine göre seçmek istersiniz?");
@@ -687,7 +681,7 @@ public class Main {
                                     if (Library.getReaders().containsKey(readerId)) {
                                         Reader person = Library.getReaders().get(readerId);
                                         person.borrow_book(selectedBook.getId());
-                                        System.out.println("Kitap başarıyla ödünç alındı.");
+                                        System.out.println("Kitap " + person.getName()  +" adına başarıyla ödünç alındı.");
                                         break;
                                     } else {
                                         System.out.println("Sistemde böyle bir kullanıcı bulunmuyor, lütfen ID'yi doğru girin.");
@@ -732,6 +726,12 @@ public class Main {
                         }
                     }
                     break;
+
+
+
+                // MAIN CASE GERİ İADE ET
+
+
 
                 default:
                     System.out.println("Lütfen seçimizi düzgün yapın.");
